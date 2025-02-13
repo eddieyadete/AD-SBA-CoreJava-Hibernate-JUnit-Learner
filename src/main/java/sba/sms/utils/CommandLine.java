@@ -5,6 +5,9 @@ import sba.sms.models.Student;
 import sba.sms.services.CourseService;
 import sba.sms.services.StudentService;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 /**
  * CommandLine is a Utility class that runs each time the application
  * executes. It performs a common routine by creating and persisting
@@ -29,7 +32,7 @@ public class CommandLine {
      *
      */
     public static void addData(){
-        /*
+
 
         StudentService studentService = new StudentService();
         CourseService courseService = new CourseService();
@@ -49,6 +52,5 @@ public class CommandLine {
         courseService.createCourse(new Course("Web Services", "Raheem Abolfathzadeh"));
         courseService.createCourse(new Course("Microservices", "Eric Heilig"));
 
-        */
     }
 }
