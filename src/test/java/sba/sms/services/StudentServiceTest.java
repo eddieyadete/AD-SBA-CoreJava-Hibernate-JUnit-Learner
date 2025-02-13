@@ -23,11 +23,11 @@ public class StudentServiceTest {
 
     @Test
     void testCreateAndFetchStudent() {
-        Student student = new Student("test@example.com", "Test User", "testpass");
+        Student student = new Student("jaja@example.com", "jaja User", "jajapass");
         studentService.createStudent(student);
-        Student fetched = studentService.getStudentByEmail("test@example.com");
+        Student fetched = studentService.getStudentByEmail("jaja@example.com");
         assertNotNull(fetched);
-        assertEquals("Test User", fetched.getName());
+        assertEquals("jaja User", fetched.getName());
     }
 
     @Test
