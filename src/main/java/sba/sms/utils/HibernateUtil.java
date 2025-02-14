@@ -18,21 +18,49 @@ import org.hibernate.cfg.Configuration;
  *  <b>DO NOT MODIFY THIS CODE</b>
  */
 public class HibernateUtil {
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+    private HibernateUtil() {
+        // Utility classes should not have public constructors
+    }
 
-    private static SessionFactory buildSessionFactory() {
-        try {
-            return new Configuration().configure().buildSessionFactory();
-        } catch (Throwable ex) {
+    /**
+     * @Getter builds a standard getter method for the object
+     * sessionFactory.
+     */
+    @Getter
+    private static SessionFactory sessionFactory = buildSessionFactory();
+
+    /**
+     * Method builds a session factory from the 'hibernate.cfg.xml' file
+     * in the 'resources' folder and returns a sessionFactory object.
+     * @return
+     */
+    private static SessionFactory buildSessionFactory()
+    {
+        try
+        {
+            if (sessionFactory == null)
+            {
+                StandardServiceRegistry standardRegistry = new StandardServiceRegistryBuilder()
+                        .configure("hibernate.cfg.xml").build();
+
+                Metadata metaData = new MetadataSources(standardRegistry)
+                        .getMetadataBuilder()
+                        .build();
+
+                sessionFactory = metaData.getSessionFactoryBuilder().build();
+            }
+            return sessionFactory;
+        } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);
         }
     }
 
-    public static SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
-
+    /**
+     * Closes the session factory.
+     */
     public static void shutdown() {
         getSessionFactory().close();
     }
+
+
 }
